@@ -107,15 +107,6 @@ Open a terminal in the inner `Generic/Generic` folder, where `main.py` and `scri
 
 ### 2. Create a virtual environment
 
-**Windows PowerShell:**
-
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-**Linux/macOS:**
-
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
@@ -124,7 +115,6 @@ source .venv/bin/activate
 ### 3. Install dependencies
 
 ```bash
-python -m pip install --upgrade pip
 python -m pip install mitmproxy PyJWT cryptography requests
 ```
 
