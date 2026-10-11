@@ -3,17 +3,6 @@
 **A Python and mitmproxy-based toolkit for inspecting JWT authentication security and identifying OAuth 2.0 authorization flows.**
 
 AAT provides a terminal menu that launches eight independent mitmproxy addons. Seven modules explore common JWT implementation weaknesses, while the eighth observes OAuth 2.0 grant types in proxied traffic. 
-## Table of contents
-
-1. [Overview](#overview)
-2. [Key features](#key-features)
-3. [Architecture and workflow](#architecture-and-workflow)
-4. [Project structure](#project-structure)
-5. [Technology stack](#technology-stack)
-6. [Prerequisites and installation](#prerequisites-and-installation)
-7. [Running the toolkit](#running-the-toolkit)
-8. [Module-by-module explanation](#module-by-module-explanation)
-9. [Results and interpretation](#results-and-interpretation)
 
 ## Overview
 
@@ -176,8 +165,6 @@ Substitute the script number as needed. JWT-mutating modules can change authenti
 
 **Output:** `jwt_attack_results_script1.txt`; dynamic endpoints may be appended to `jwt_endpoints_dynamic.txt`.
 
-**Caution:** The module uses a global modified token, can overwrite multiple cookies, and does not cryptographically prove that a protected action succeeded. A `200 OK` response may be a public page, error page, or login page.
-
 ### Module 2 — Flawed signature verification (`script2.py`)
 
 **Security concept:** Servers must validate JWT signatures and reject unsigned replacements.
@@ -185,8 +172,6 @@ Substitute the script number as needed. JWT-mutating modules can change authenti
 **Implementation:** Also creates an `alg: none` JWT. Unlike module 1, it tracks mutation in mitmproxy flow metadata and produces a single verdict for the first tested modified response. It tracks endpoints when an Authorization header is present.
 
 **Output:** `jwt_attack_results_script2.txt` and potentially `jwt_endpoints_dynamic.txt`.
-
-**Caution:** Despite its different name, the implemented payload overlaps substantially with module 1. It does not currently exercise a comprehensive set of signature-verification flaws.
 
 ### Module 3 — Weak HMAC signing-secret detection (`script3.py`)
 
@@ -196,8 +181,6 @@ Substitute the script number as needed. JWT-mutating modules can change authenti
 
 **Output:** `jwt_attack_results_script3.txt`.
 
-**Caution:** Failure to find a secret in the supplied list does **not** establish that the signing secret is strong. A found secret is written in plaintext to the result file, so treat reports as sensitive. This module checks the signature offline; it does not need to alter the outgoing request.
-
 ### Module 4 — Embedded JWK header injection (`script4.py`)
 
 **Security concept:** Some JWT implementations may incorrectly trust a public verification key embedded in an untrusted token header (`jwk`).
@@ -205,8 +188,6 @@ Substitute the script number as needed. JWT-mutating modules can change authenti
 **Implementation:** For RSA-signed tokens, loads `private_key.pem`, derives its public-key parameters, embeds a JWK in the JWT header, and signs a replacement JWT with the test private key. It uses `jwt_endpoints_static.txt` as an optional endpoint filter and evaluates later responses.
 
 **Output:** `jwt_attack_results_script4.txt`.
-
-**Caution:** The private key is missing from the archive. The current response/baseline handling can produce premature or misleading verdicts, and non-401/403 responses do not establish successful authentication. The static endpoint file must contain paths matching the request path format expected by this script.
 
 ### Module 5 — JKU header injection (`script5.py`)
 
@@ -216,8 +197,6 @@ Substitute the script number as needed. JWT-mutating modules can change authenti
 
 **Output:** `jwt_attack_results_script5.txt` and potentially `jwt_endpoints_dynamic.txt`.
 
-**Caution:** The current code does **not** host an attacker-controlled JWKS endpoint or verify that the target actually fetched the specified key. It also selects the first successfully constructed candidate rather than systematically exercising every JWKS path. Response-size changes alone cannot confirm JKU exploitation.
-
 ### Module 6 — `kid` path traversal (`script6.py`)
 
 **Security concept:** The JWT `kid` header identifies a signing key. Unsafe use of that value as a file path may lead to path traversal or incorrect key selection.
@@ -226,8 +205,6 @@ Substitute the script number as needed. JWT-mutating modules can change authenti
 
 **Output:** `jwt_attack_results_script6.txt` and potentially `jwt_endpoints_dynamic.txt`.
 
-**Caution:** Changing the header normally invalidates the original signature. The script currently attempts only the first successfully constructed candidate and does not prove which key the server selected. Its baseline/test association and verdict heuristics need improvement.
-
 ### Module 7 — JWKS discovery and RS-to-HS algorithm confusion (`script7.py`)
 
 **Security concept:** In an algorithm-confusion flaw, a verifier may incorrectly treat an RSA public key as an HMAC shared secret after accepting an attacker-chosen algorithm.
@@ -235,8 +212,6 @@ Substitute the script number as needed. JWT-mutating modules can change authenti
 **Implementation:** Inspects JWT headers and payloads, attempts unsigned-token testing, discovers public keys from common JWKS locations, converts RSA JWK parameters into a public-key representation, and includes an RS-to-HS token-generation path. It annotates requests using `X-JWT-Test` and compares responses against a stored baseline.
 
 **Output:** `jwt_generic_results_script7.txt` (created during execution).
-
-**Caution:** The current request logic prioritizes `alg: none`, so the RS-to-HS branch is generally unreachable for normal signed JWTs when unsigned-token generation succeeds. Modern PyJWT versions may also reject PEM-formatted asymmetric keys used as HMAC secrets. This module requires refactoring and validation before claiming reliable algorithm-confusion coverage.
 
 ### Module 8 — OAuth 2.0 grant-type detector (`script8.py`)
 
@@ -255,8 +230,6 @@ Substitute the script number as needed. JWT-mutating modules can change authenti
 - Heuristically inferred client-credentials usage from Basic authentication at a token endpoint.
 
 **Output:** `grant_type_results.txt`, including a summary when the addon stops.
-
-**Caution:** This module is a detector, **not** a complete OAuth security scanner. A detected flow is not automatically a vulnerability; PKCE presence does not establish correct PKCE enforcement. Token-issuance observations are reported alongside grant types even though they are not themselves OAuth grants.
 
 ## Results and interpretation
 
