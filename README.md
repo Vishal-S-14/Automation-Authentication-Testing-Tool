@@ -263,5 +263,3 @@ To verify a suspected finding, compare the original and modified requests agains
 
 - `jwt_endpoints_static.txt` is an existing path list used by certain modules to filter traffic. Its expected format is not entirely consistent across modules.
 - `jwt_endpoints_dynamic.txt` collects observed method/path entries in modules that implement dynamic logging.
-
-These files are not a complete automatic API inventory. Endpoint logs and result files may contain sensitive path names, parameters, or secrets; review them before sharing.
