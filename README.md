@@ -14,7 +14,6 @@ AAT provides a terminal menu that launches eight independent mitmproxy addons. S
 7. [Running the toolkit](#running-the-toolkit)
 8. [Module-by-module explanation](#module-by-module-explanation)
 9. [Results and interpretation](#results-and-interpretation)
-10. [Current implementation limitations](#current-implementation-limitations)
 
 ## Overview
 
