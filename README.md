@@ -10,8 +10,6 @@ Web applications commonly use **JSON Web Tokens (JWTs)** for bearer-token authen
 
 AAT uses **mitmproxy** to observe HTTP(S) requests and responses and, in selected modules, modify JWTs in proxied requests. The project aims to make these security checks accessible through a single terminal interface.
 
-**Scope of the current code:** JWT header and signing-key checks; JWKS endpoint discovery; OAuth grant-type and token-issuance observation. It does **not** currently provide a full OAuth redirect URI, state, PKCE validation, or account-takeover test suite.
-
 ## Key features
 
 - Menu-driven launcher with eight individually selectable modules.
