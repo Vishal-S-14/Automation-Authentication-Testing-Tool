@@ -107,6 +107,15 @@ Open a terminal in the inner `Generic/Generic` folder, where `main.py` and `scri
 
 ### 2. Create a virtual environment
 
+**Windows PowerShell:**
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+**Linux/macOS:**
+
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
@@ -115,10 +124,20 @@ source .venv/bin/activate
 ### 3. Install dependencies
 
 ```bash
+python -m pip install --upgrade pip
 python -m pip install mitmproxy PyJWT cryptography requests
 ```
 
-### 4. Configure the test client
+These are the packages imported by the supplied scripts. The archive does not provide pinned dependency versions; compatibility should be tested in your environment.
+
+### 4. Check the installation
+
+```bash
+mitmproxy --version
+python -c "import mitmproxy, jwt, cryptography, requests; print('Imports successful')"
+```
+
+### 5. Configure the test client
 
 The launcher binds mitmproxy to port **8080**. Set your browser or HTTP client to use the local proxy at `127.0.0.1:8080`. To inspect HTTPS traffic, follow the official mitmproxy certificate setup instructions for your test browser/device: <https://docs.mitmproxy.org/stable/>.
 

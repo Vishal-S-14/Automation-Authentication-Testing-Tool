@@ -1,0 +1,17 @@
+GET /success.txt?ipv6
+GET /success.txt?ipv4
+GET /%F0%9F%A4%96
+GET /chatbot/genai/state
+POST /identity/api/auth/login
+GET /login
+POST /login
+GET /dashboard
+GET /api/user
+GET /favicon.ico
+POST /v1/ads
+GET /api/user
+GET /favicon.ico
+GET /dashboard
+POST /v1/ads
+GET /logout
+GET /

@@ -1,0 +1,40 @@
+# ---- Acme portal  ----
+/login
+/dashboard
+/api/user
+/register 
+/admin
+# ---- CRAPI  ----
+/identity/api/v2/user/dashboard
+/api/v2/user/dashboard
+/api/v2/user/change-email
+/api/v2/user/change-phone-number
+/api/v2/user/verify-phone-otp
+/api/v2/user/reset-password
+/api/v2/user/verify-email-token
+/api/auth/verify
+/api/v2/vehicle/add_vehicle
+/api/v2/vehicle/vehicles
+/api/v2/vehicle/resend_email
+/api/v2/vehicle/<carId>/location
+/api/merchant/service_requests/<vehicleVIN>
+/api/mechanic
+/api/mechanic/service_requests
+/api/mechanic/service_request/<serviceId>
+/api/mechanic/service_request/<serviceId>/comment
+/api/mechanic/mechanic_report
+/api/mechanic/download_report
+/api/mechanic/receive_report
+/api/shop/orders
+/api/shop/orders/all
+/api/shop/orders/<orderId>
+/api/shop/orders/return_order
+/api/shop/apply_coupon
+/api/v2/community/posts
+/api/v2/community/posts/recent
+/api/v2/coupon/validate-coupon
+# ---- Portswigger  ----
+/academyLabHeader
+/login
+/my-account?id=wiener
+
