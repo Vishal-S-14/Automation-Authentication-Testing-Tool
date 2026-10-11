@@ -295,24 +295,3 @@ To verify a suspected finding, compare the original and modified requests agains
 - `jwt_endpoints_dynamic.txt` collects observed method/path entries in modules that implement dynamic logging.
 
 These files are not a complete automatic API inventory. Endpoint logs and result files may contain sensitive path names, parameters, or secrets; review them before sharing.
-
-## Current implementation limitations
-
-The following limitations were identified directly in the supplied code:
-
-1. **Single-addon execution:** The launcher runs one module at a time, not an end-to-end automated scan.
-2. **Overlapping tests:** Modules 1 and 2 both implement `alg: none` testing.
-3. **Missing key material:** Modules 4 and 5 expect `private_key.pem`, absent from the ZIP.
-4. **Heuristic verdicts:** Status codes, body keywords, and response-size changes can produce false positives and false negatives.
-5. **Global mutable state:** Several addons reuse one forged token across requests and endpoints, making multi-user/multi-host traffic unreliable.
-6. **Baseline issues:** Some modules compare responses that are not guaranteed to represent an original-versus-modified request pair.
-7. **Incomplete candidate coverage:** Modules 5 and 6 do not exhaustively test all defined candidate paths/payloads.
-8. **Module 7 branch issue:** The unsigned-token test can prevent the algorithm-confusion branch from running.
-9. **Endpoint-filter inconsistency:** Static endpoint matching differs between modules; some expect path-only values, while other logic compares raw lines.
-10. **No automated test suite:** The ZIP does not include unit/integration tests or reproducible benchmark results.
-11. **No configuration/packaging:** Port, filenames, and some test parameters are hard-coded; dependency versions are not pinned.
-12. **OAuth observation only:** Module 8 does not verify redirect URI validation, `state`, PKCE verifier enforcement, or authorization-code replay protections.
-13. **Sensitive output:** The weak-secret module logs discovered secrets directly.
-
-These are known development gaps, not evidence that any particular target is vulnerable.
-"# Automation-Authentication-Testing-Tool-AAT-" 
