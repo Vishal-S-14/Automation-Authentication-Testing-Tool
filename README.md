@@ -284,7 +284,7 @@ CONFIDENCE: HIGH
 | `VULNERABLE` | A script's detection condition was met; **manual confirmation required** |
 | `POTENTIALLY VULNERABLE` | Response behavior may justify further investigation |
 | `NOT VULNERABLE` | This particular test did not demonstrate the weakness; not proof of overall security |
-| Confidence | A script-assigned heuristic label, not a validated probability or formal severity rating |
+| `Confidence` | A script-assigned heuristic label, not a validated probability or formal severity rating |
 
 To verify a suspected finding, compare the original and modified requests against the **same protected endpoint**, establish the expected unauthorized response, and check whether the modified request actually gained access to a protected resource or action. Do not rely on HTTP status alone.
 
