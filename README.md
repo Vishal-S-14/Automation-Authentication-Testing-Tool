@@ -41,7 +41,7 @@ AAT uses **mitmproxy** to observe HTTP(S) requests and responses and, in selecte
 
 The following architecture diagram illustrates the interaction between the AAT launcher, selected mitmproxy addon, browser or test client, target application, and analysis outputs.
 
-![AAT Architecture Diagram](images/aat-architecture.png)
+![AAT Architecture Diagram](images/aat-archeitecture.png)
 
 *Figure 1: System Architecture of the Automated Authentication Testing Tool (AAT).*
 
